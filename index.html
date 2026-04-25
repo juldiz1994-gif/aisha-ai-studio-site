@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aisha AI Studio</title>
+  <style>
+    :root {
+      --bg: #060608;
+      --card: #0f0f14;
+      --card2: #141418;
+      --border: rgba(255,255,255,.08);
+      --accent: #a78bfa;
+      --accent2: #7c3aed;
+      --gold: #f59e0b;
+      --white: #f4f4f5;
+      --muted: #71717a;
+      --grad: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(6,6,8,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 15px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--grad); color: #fff !important;
+      padding: 9px 22px; border-radius: 100px;
+      font-weight: 600; font-size: 14px !important;
+      -webkit-text-fill-color: #fff !important;
+      transition: opacity .2s !important;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(167,139,250,.3);
+      background: rgba(167,139,250,.08);
+      padding: 6px 18px; border-radius: 100px;
+      font-size: 13px; color: var(--accent); margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '✦'; }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900; line-height: 1.1; letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--muted); max-width: 560px; margin: 0 auto 16px;
+    }
+    .hero-desc {
+      font-size: clamp(15px, 1.6vw, 18px);
+      color: #a1a1aa; max-width: 500px; margin: 0 auto 40px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--grad); color: #fff; padding: 14px 32px;
+      border-radius: 100px; font-weight: 700; font-size: 16px;
+      text-decoration: none; transition: opacity .2s, transform .2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--white);
+      padding: 14px 32px; border-radius: 100px;
+      font-weight: 600; font-size: 16px;
+      text-decoration: none; transition: border-color .2s, transform .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    /* Stats */
+    .stats {
+      display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+      margin-top: 72px;
+      padding-top: 48px; border-top: 1px solid var(--border);
+      width: 100%; max-width: 700px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; letter-spacing: -1px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 96px 24px; }
+    .section-title {
+      text-align: center; font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -1px; margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center; color: var(--muted);
+      font-size: 17px; max-width: 520px; margin: 0 auto 56px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--card); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      transition: border-color .25s, transform .25s;
+      opacity: 0; transform: translateY(24px);
+    }
+    .service-card.visible { opacity: 1; transform: none; }
+    .service-card:hover { border-color: rgba(167,139,250,.4); transform: translateY(-3px); }
+    .service-card.featured {
+      border-color: rgba(167,139,250,.5);
+      background: linear-gradient(145deg, #1a1025 0%, #0f0f14 100%);
+    }
+    .service-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 16px; align-self: flex-start;
+    }
+    .badge-featured { background: rgba(167,139,250,.15); color: var(--accent); }
+    .badge-premium { background: rgba(245,158,11,.12); color: var(--gold); }
+    .badge-presale { background: rgba(74,222,128,.1); color: #4ade80; }
+    .service-icon { font-size: 36px; margin-bottom: 16px; }
+    .service-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .service-desc { color: var(--muted); font-size: 14px; line-height: 1.65; flex: 1; }
+    .service-features {
+      list-style: none; margin: 18px 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .service-features li {
+      font-size: 13px; color: #a1a1aa;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .service-features li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
+    .service-price {
+      font-size: 26px; font-weight: 900; letter-spacing: -0.5px;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin: 16px 0 20px;
+    }
+    .service-card .btn-primary { text-align: center; }
+
+    /* ── ABOUT ── */
+    .about-inner {
+      display: flex; gap: 64px; align-items: center;
+      flex-wrap: wrap;
+    }
+    .about-photo-wrap {
+      flex: 0 0 280px;
+      position: relative;
+    }
+    .about-photo {
+      width: 280px; height: 340px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .about-photo-placeholder {
+      width: 280px; height: 340px;
+      border-radius: 20px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px;
+    }
+    .about-photo-ring {
+      position: absolute; inset: -8px;
+      border-radius: 28px;
+      border: 1px solid rgba(167,139,250,.2);
+      pointer-events: none;
+    }
+    .about-text { flex: 1; min-width: 280px; }
+    .about-text h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; margin-bottom: 6px; }
+    .about-text .subtitle { color: var(--accent); font-size: 16px; margin-bottom: 20px; }
+    .about-text p { color: #a1a1aa; font-size: 16px; line-height: 1.75; margin-bottom: 16px; }
+    .expertise-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .chip {
+      border: 1px solid var(--border); padding: 7px 16px;
+      border-radius: 100px; font-size: 13px; color: var(--muted);
+    }
+
+    /* ── CHANNEL ── */
+    .channel { background: var(--card); }
+    .channel-box {
+      max-width: 600px; margin: 0 auto;
+      border: 1px solid rgba(167,139,250,.25);
+      border-radius: 20px;
+      padding: 48px 40px; text-align: center;
+      background: linear-gradient(145deg, #12101c 0%, #0f0f14 100%);
+    }
+    .channel-icon { font-size: 56px; margin-bottom: 20px; }
+    .channel-box h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    .channel-box p { color: var(--muted); font-size: 15px; margin-bottom: 8px; }
+    .channel-perks { list-style: none; margin: 20px 0 32px; display: flex; flex-direction: column; gap: 10px; }
+    .channel-perks li { font-size: 14px; color: #a1a1aa; display: flex; align-items: center; gap: 10px; justify-content: center; }
+    .channel-perks li::before { content: '🎯'; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; max-width: 700px; margin: 0 auto;
+    }
+    .contact-card {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px 24px; text-align: center;
+      text-decoration: none; color: var(--white);
+      transition: border-color .2s, transform .2s;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .contact-icon { font-size: 32px; }
+    .contact-label { font-size: 13px; color: var(--muted); }
+    .contact-value { font-size: 15px; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 24px; text-align: center;
+      color: var(--muted); font-size: 14px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── MOBILE NAV ── */
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-mobile-cta { display: block; }
+      .hero { padding: 100px 20px 60px; }
+      .stats { gap: 32px; }
+      section { padding: 64px 20px; }
+      .about-inner { flex-direction: column; align-items: center; }
+      .about-photo-wrap { flex: none; }
+      .channel-box { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">AishaAI</div>
+  <div class="nav-links">
+    <a href="#services">Қызметтер</a>
+    <a href="#about">Мен туралы</a>
+    <a href="#contact">Байланыс</a>
+    <a href="https://t.me/+e9V00D-EATpkYjQy" class="nav-cta">Тапсырыс беру</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-badge">AI · Автоматизация · Цифрлы шешімдер</div>
+  <h1>Айшаның <span>Жасанды Интеллект</span> Студиясы</h1>
+  <p class="hero-sub">Бизнесіңізді автоматтандырып, табысыңызды арттырамын</p>
+  <p class="hero-desc">Видео, сайт, чатбот — барлығын AI арқылы жасаймын</p>
+  <div class="hero-btns">
+    <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+    <a href="#services" class="btn-outline">Қызметтерді көру</a>
+  </div>
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">60+</div>
+      <div class="stat-label">Оқушы</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">600+</div>
+      <div class="stat-label">Жасалған видео</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Жыл тәжірибе</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <h2 class="section-title fade-up">Не ұсынамын?</h2>
+    <p class="section-sub fade-up">Технология арқылы бизнесіңізді алға жылжытамын</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-badge badge-featured">Хит</span>
+        <div class="service-icon">🎬</div>
+        <div class="service-name">AI Видео жасау</div>
+        <p class="service-desc">Жасанды интеллект арқылы кәсіби видео контент — 1 минуттық реклама немесе презентация.</p>
+        <ul class="service-features">
+          <li>Толық AI генерациясы</li>
+          <li>HD сапасы</li>
+          <li>3 күнде дайын</li>
+        </ul>
+        <div class="service-price">15 000 ₸</div>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Сайт жасау</div>
+        <p class="service-desc">Анимация қосылған, кез келген фото мен контент жүктей аласыз. Мобильді оңтайластырылған.</p>
+        <ul class="service-features">
+          <li>Анимациялар</li>
+          <li>Кез келген контент</li>
+          <li>Мобильді + десктоп</li>
+        </ul>
+        <div class="service-price">30 000 ₸</div>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <div class="service-name">Чатбот жасау</div>
+        <p class="service-desc">Telegram, Instagram, WhatsApp — барлық платформаға арналған автоматты бот.</p>
+        <ul class="service-features">
+          <li>Көп платформалы</li>
+          <li>Авто төлем тексеру</li>
+          <li>Кездесу еске салғыш</li>
+        </ul>
+        <div class="service-price">30 000 ₸</div>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+      </div>
+
+      <div class="service-card">
+        <span class="service-badge badge-presale">Алдын-ала сату</span>
+        <div class="service-icon">📚</div>
+        <div class="service-name">Автоматизация курсы</div>
+        <p class="service-desc">Бот, сайт, видео жасауды үйреніңіз. Сабақтарды өзіңіз сата аласыз.</p>
+        <ul class="service-features">
+          <li>Бот жасау</li>
+          <li>Сайт жасау</li>
+          <li>AI видео жасау</li>
+          <li>Орын шектеулі</li>
+        </ul>
+        <div class="service-price">60 000 ₸</div>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+      </div>
+
+      <div class="service-card featured">
+        <span class="service-badge badge-premium">Premium</span>
+        <div class="service-icon">⚡</div>
+        <div class="service-name">Толық автоматизация</div>
+        <p class="service-desc">Бизнесіңізді толығымен автоматтандыру — барлық платформаны біріктіремін.</p>
+        <ul class="service-features">
+          <li>Көп платформалы интеграция</li>
+          <li>Авто жүйелер</li>
+          <li>24/7 жұмыс</li>
+        </ul>
+        <div class="service-price">150 000 ₸</div>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner fade-up">
+      <div class="about-photo-wrap">
+        <div class="about-photo-ring"></div>
+        <div class="about-photo-placeholder">👩‍💻</div>
+      </div>
+      <div class="about-text">
+        <h2>Aisha — AI Сарапшы</h2>
+        <p class="subtitle">Жасанды интеллект маманы</p>
+        <p>3 жылдық тәжірибем бар. Осы уақыт ішінде <strong>600-ден астам видео</strong> жасап, <strong>60-тан астам оқушыға</strong> AI дағдыларын үйреттім.</p>
+        <p>Instagram-да портфолиомды көре аласыз: <a href="https://instagram.com/aisha_jividio" style="color:var(--accent)">@aisha_jividio</a></p>
+        <div class="expertise-chips">
+          <span class="chip">AI Видео</span>
+          <span class="chip">Веб-сайт</span>
+          <span class="chip">Чатботтар</span>
+          <span class="chip">Автоматизация</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNEL -->
+<section class="channel">
+  <div class="container">
+    <div class="channel-box fade-up">
+      <div class="channel-icon">📢</div>
+      <h3>Тегін Telegram арнасы</h3>
+      <p>AI дағдыларын тегін үйреніңіз</p>
+      <ul class="channel-perks">
+        <li>Тегін AI сабақтары</li>
+        <li>Видео жасау кеңестері</li>
+        <li>Жаңа қызметтер туралы хабарлама</li>
+      </ul>
+      <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Арнаға қосылу →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title fade-up">Хабарласыңыз</h2>
+    <p class="section-sub fade-up">Сұрақтарыңыз болса — жазыңыз!</p>
+    <div class="contact-grid">
+      <a href="tel:+77715104948" class="contact-card">
+        <span class="contact-icon">📞</span>
+        <span class="contact-label">Телефон</span>
+        <span class="contact-value">+7 771 510 4948</span>
+      </a>
+      <a href="https://t.me/+e9V00D-EATpkYjQy" class="contact-card">
+        <span class="contact-icon">✈️</span>
+        <span class="contact-label">Telegram</span>
+        <span class="contact-value">Жазу →</span>
+      </a>
+      <a href="https://instagram.com/aisha_jividio" class="contact-card">
+        <span class="contact-icon">📸</span>
+        <span class="contact-label">Instagram</span>
+        <span class="contact-value">@aisha_jividio</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Aisha AI Studio. Барлық құқықтар сақталған.</p>
+  <p style="margin-top:8px">
+    <a href="https://t.me/+e9V00D-EATpkYjQy">Telegram-да жазу</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up, .service-card').forEach(el => observer.observe(el));
+
+  // Stagger service cards
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 80) + 'ms';
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
