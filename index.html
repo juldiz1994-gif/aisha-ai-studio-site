@@ -273,6 +273,21 @@
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
     .fade-up.visible { opacity: 1; transform: none; }
 
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex; align-items: center; gap: 4px;
+      background: rgba(255,255,255,.06); border-radius: 100px;
+      padding: 4px; border: 1px solid var(--border);
+    }
+    .lang-btn {
+      padding: 5px 13px; border-radius: 100px; border: none;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      background: transparent; color: var(--muted); transition: all .2s;
+    }
+    .lang-btn.active {
+      background: var(--grad); color: #fff;
+    }
+
     /* ── MOBILE NAV ── */
     @media (max-width: 640px) {
       nav { padding: 14px 20px; }
@@ -293,35 +308,39 @@
 <nav>
   <div class="logo">AishaAI</div>
   <div class="nav-links">
-    <a href="#services">Қызметтер</a>
-    <a href="#about">Мен туралы</a>
-    <a href="#contact">Байланыс</a>
-    <a href="https://t.me/+e9V00D-EATpkYjQy" class="nav-cta">Тапсырыс беру</a>
+    <a href="#services" data-kk="Қызметтер" data-ru="Услуги">Қызметтер</a>
+    <a href="#about" data-kk="Мен туралы" data-ru="Обо мне">Мен туралы</a>
+    <a href="#contact" data-kk="Байланыс" data-ru="Контакты">Байланыс</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('kk')">ҚАЗ</button>
+      <button class="lang-btn" onclick="setLang('ru')">РУС</button>
+    </div>
+    <a href="https://t.me/+e9V00D-EATpkYjQy" class="nav-cta" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-badge">AI · Автоматизация · Цифрлы шешімдер</div>
-  <h1>Айшаның <span>Жасанды Интеллект</span> Студиясы</h1>
-  <p class="hero-sub">Бизнесіңізді автоматтандырып, табысыңызды арттырамын</p>
-  <p class="hero-desc">Видео, сайт, чатбот — барлығын AI арқылы жасаймын</p>
+  <div class="hero-badge" data-kk="AI · Автоматизация · Цифрлы шешімдер" data-ru="AI · Автоматизация · Цифровые решения">AI · Автоматизация · Цифрлы шешімдер</div>
+  <h1><span data-kk="Айшаның" data-ru="Студия">Айшаның</span> <span class="grad-text" data-kk="Жасанды Интеллект" data-ru="Искусственного Интеллекта">Жасанды Интеллект</span> <span data-kk="Студиясы" data-ru="Айши">Студиясы</span></h1>
+  <p class="hero-sub" data-kk="Бизнесіңізді автоматтандырып, табысыңызды арттырамын" data-ru="Автоматизирую ваш бизнес и увеличиваю доход">Бизнесіңізді автоматтандырып, табысыңызды арттырамын</p>
+  <p class="hero-desc" data-kk="Видео, сайт, чатбот — барлығын AI арқылы жасаймын" data-ru="Видео, сайт, чат-бот — всё создаю с помощью AI">Видео, сайт, чатбот — барлығын AI арқылы жасаймын</p>
   <div class="hero-btns">
-    <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
-    <a href="#services" class="btn-outline">Қызметтерді көру</a>
+    <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
+    <a href="#services" class="btn-outline" data-kk="Қызметтерді көру" data-ru="Смотреть услуги">Қызметтерді көру</a>
   </div>
   <div class="stats">
     <div class="stat-item">
       <div class="stat-num">60+</div>
-      <div class="stat-label">Оқушы</div>
+      <div class="stat-label" data-kk="Оқушы" data-ru="Учеников">Оқушы</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">600+</div>
-      <div class="stat-label">Жасалған видео</div>
+      <div class="stat-label" data-kk="Жасалған видео" data-ru="Создано видео">Жасалған видео</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">3</div>
-      <div class="stat-label">Жыл тәжірибе</div>
+      <div class="stat-label" data-kk="Жыл тәжірибе" data-ru="Года опыта">Жыл тәжірибе</div>
     </div>
   </div>
 </section>
@@ -329,77 +348,77 @@
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="container">
-    <h2 class="section-title fade-up">Не ұсынамын?</h2>
-    <p class="section-sub fade-up">Технология арқылы бизнесіңізді алға жылжытамын</p>
+    <h2 class="section-title fade-up" data-kk="Не ұсынамын?" data-ru="Что я предлагаю?">Не ұсынамын?</h2>
+    <p class="section-sub fade-up" data-kk="Технология арқылы бизнесіңізді алға жылжытамын" data-ru="Продвигаю ваш бизнес с помощью технологий">Технология арқылы бизнесіңізді алға жылжытамын</p>
     <div class="services-grid">
 
       <div class="service-card">
-        <span class="service-badge badge-featured">Хит</span>
+        <span class="service-badge badge-featured" data-kk="Хит" data-ru="Хит">Хит</span>
         <div class="service-icon">🎬</div>
-        <div class="service-name">AI Видео жасау</div>
-        <p class="service-desc">Жасанды интеллект арқылы кәсіби видео контент — 1 минуттық реклама немесе презентация.</p>
+        <div class="service-name" data-kk="AI Видео жасау" data-ru="AI Создание видео">AI Видео жасау</div>
+        <p class="service-desc" data-kk="Жасанды интеллект арқылы кәсіби видео контент — 1 минуттық реклама немесе презентация." data-ru="Профессиональный видеоконтент с помощью ИИ — реклама или презентация на 1 минуту.">Жасанды интеллект арқылы кәсіби видео контент — 1 минуттық реклама немесе презентация.</p>
         <ul class="service-features">
-          <li>Толық AI генерациясы</li>
-          <li>HD сапасы</li>
-          <li>3 күнде дайын</li>
+          <li data-kk="Толық AI генерациясы" data-ru="Полная AI генерация">Толық AI генерациясы</li>
+          <li data-kk="HD сапасы" data-ru="HD качество">HD сапасы</li>
+          <li data-kk="3 күнде дайын" data-ru="Готово за 3 дня">3 күнде дайын</li>
         </ul>
         <div class="service-price">15 000 ₸</div>
-        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🌐</div>
-        <div class="service-name">Сайт жасау</div>
-        <p class="service-desc">Анимация қосылған, кез келген фото мен контент жүктей аласыз. Мобильді оңтайластырылған.</p>
+        <div class="service-name" data-kk="Сайт жасау" data-ru="Создание сайта">Сайт жасау</div>
+        <p class="service-desc" data-kk="Анимация қосылған, кез келген фото мен контент жүктей аласыз. Мобильді оңтайластырылған." data-ru="С анимацией, любые фото и контент. Адаптировано под мобильные.">Анимация қосылған, кез келген фото мен контент жүктей аласыз. Мобильді оңтайластырылған.</p>
         <ul class="service-features">
-          <li>Анимациялар</li>
-          <li>Кез келген контент</li>
-          <li>Мобильді + десктоп</li>
+          <li data-kk="Анимациялар" data-ru="Анимации">Анимациялар</li>
+          <li data-kk="Кез келген контент" data-ru="Любой контент">Кез келген контент</li>
+          <li data-kk="Мобильді + десктоп" data-ru="Мобильная + десктоп">Мобильді + десктоп</li>
         </ul>
         <div class="service-price">30 000 ₸</div>
-        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
       </div>
 
       <div class="service-card">
         <div class="service-icon">🤖</div>
-        <div class="service-name">Чатбот жасау</div>
-        <p class="service-desc">Telegram, Instagram, WhatsApp — барлық платформаға арналған автоматты бот.</p>
+        <div class="service-name" data-kk="Чатбот жасау" data-ru="Создание чат-бота">Чатбот жасау</div>
+        <p class="service-desc" data-kk="Telegram, Instagram, WhatsApp — барлық платформаға арналған автоматты бот." data-ru="Telegram, Instagram, WhatsApp — автоматический бот для всех платформ.">Telegram, Instagram, WhatsApp — барлық платформаға арналған автоматты бот.</p>
         <ul class="service-features">
-          <li>Көп платформалы</li>
-          <li>Авто төлем тексеру</li>
-          <li>Кездесу еске салғыш</li>
+          <li data-kk="Көп платформалы" data-ru="Мультиплатформенный">Көп платформалы</li>
+          <li data-kk="Авто төлем тексеру" data-ru="Авто проверка оплаты">Авто төлем тексеру</li>
+          <li data-kk="Кездесу еске салғыш" data-ru="Напоминание о встречах">Кездесу еске салғыш</li>
         </ul>
         <div class="service-price">30 000 ₸</div>
-        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
       </div>
 
       <div class="service-card">
-        <span class="service-badge badge-presale">Алдын-ала сату</span>
+        <span class="service-badge badge-presale" data-kk="Алдын-ала сату" data-ru="Предпродажа">Алдын-ала сату</span>
         <div class="service-icon">📚</div>
-        <div class="service-name">Автоматизация курсы</div>
-        <p class="service-desc">Бот, сайт, видео жасауды үйреніңіз. Сабақтарды өзіңіз сата аласыз.</p>
+        <div class="service-name" data-kk="Автоматизация курсы" data-ru="Курс по автоматизации">Автоматизация курсы</div>
+        <p class="service-desc" data-kk="Бот, сайт, видео жасауды үйреніңіз. Сабақтарды өзіңіз сата аласыз." data-ru="Научитесь создавать бот, сайт, видео. Можете продавать уроки сами.">Бот, сайт, видео жасауды үйреніңіз. Сабақтарды өзіңіз сата аласыз.</p>
         <ul class="service-features">
-          <li>Бот жасау</li>
-          <li>Сайт жасау</li>
-          <li>AI видео жасау</li>
-          <li>Орын шектеулі</li>
+          <li data-kk="Бот жасау" data-ru="Создание бота">Бот жасау</li>
+          <li data-kk="Сайт жасау" data-ru="Создание сайта">Сайт жасау</li>
+          <li data-kk="AI видео жасау" data-ru="Создание AI видео">AI видео жасау</li>
+          <li data-kk="Орын шектеулі" data-ru="Мест ограничено">Орын шектеулі</li>
         </ul>
         <div class="service-price">60 000 ₸</div>
-        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
       </div>
 
       <div class="service-card featured">
         <span class="service-badge badge-premium">Premium</span>
         <div class="service-icon">⚡</div>
-        <div class="service-name">Толық автоматизация</div>
-        <p class="service-desc">Бизнесіңізді толығымен автоматтандыру — барлық платформаны біріктіремін.</p>
+        <div class="service-name" data-kk="Толық автоматизация" data-ru="Полная автоматизация">Толық автоматизация</div>
+        <p class="service-desc" data-kk="Бизнесіңізді толығымен автоматтандыру — барлық платформаны біріктіремін." data-ru="Полная автоматизация бизнеса — объединяю все платформы.">Бизнесіңізді толығымен автоматтандыру — барлық платформаны біріктіремін.</p>
         <ul class="service-features">
-          <li>Көп платформалы интеграция</li>
-          <li>Авто жүйелер</li>
-          <li>24/7 жұмыс</li>
+          <li data-kk="Көп платформалы интеграция" data-ru="Мультиплатформенная интеграция">Көп платформалы интеграция</li>
+          <li data-kk="Авто жүйелер" data-ru="Автоматические системы">Авто жүйелер</li>
+          <li data-kk="24/7 жұмыс" data-ru="Работа 24/7">24/7 жұмыс</li>
         </ul>
         <div class="service-price">150 000 ₸</div>
-        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Тапсырыс беру</a>
+        <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Тапсырыс беру" data-ru="Заказать">Тапсырыс беру</a>
       </div>
 
     </div>
@@ -415,15 +434,15 @@
         <img class="about-photo" src="assets/images/aisha.jpg" alt="Aisha" />
       </div>
       <div class="about-text">
-        <h2>Aisha — AI Сарапшы</h2>
-        <p class="subtitle">Жасанды интеллект маманы</p>
-        <p>3 жылдық тәжірибем бар. Осы уақыт ішінде <strong>600-ден астам видео</strong> жасап, <strong>60-тан астам оқушыға</strong> AI дағдыларын үйреттім.</p>
-        <p>Instagram-да портфолиомды көре аласыз: <a href="https://instagram.com/aisha_jividio" style="color:var(--accent)">@aisha_jividio</a></p>
+        <h2 data-kk="Aisha — AI Сарапшы" data-ru="Айша — AI Эксперт">Aisha — AI Сарапшы</h2>
+        <p class="subtitle" data-kk="Жасанды интеллект маманы" data-ru="Специалист по искусственному интеллекту">Жасанды интеллект маманы</p>
+        <p data-kk="3 жылдық тәжірибем бар. Осы уақыт ішінде <strong>600-ден астам видео</strong> жасап, <strong>60-тан астам оқушыға</strong> AI дағдыларын үйреттім." data-ru="Имею <strong>3 года опыта</strong>. За это время создала <strong>более 600 видео</strong> и обучила <strong>более 60 учеников</strong> навыкам AI.">3 жылдық тәжірибем бар. Осы уақыт ішінде <strong>600-ден астам видео</strong> жасап, <strong>60-тан астам оқушыға</strong> AI дағдыларын үйреттім.</p>
+        <p data-kk='Instagram-да портфолиомды көре аласыз: <a href="https://instagram.com/aisha_jividio" style="color:var(--accent)">@aisha_jividio</a>' data-ru='Моё портфолио в Instagram: <a href="https://instagram.com/aisha_jividio" style="color:var(--accent)">@aisha_jividio</a>'>Instagram-да портфолиомды көре аласыз: <a href="https://instagram.com/aisha_jividio" style="color:var(--accent)">@aisha_jividio</a></p>
         <div class="expertise-chips">
-          <span class="chip">AI Видео</span>
-          <span class="chip">Веб-сайт</span>
-          <span class="chip">Чатботтар</span>
-          <span class="chip">Автоматизация</span>
+          <span class="chip" data-kk="AI Видео" data-ru="AI Видео">AI Видео</span>
+          <span class="chip" data-kk="Веб-сайт" data-ru="Веб-сайт">Веб-сайт</span>
+          <span class="chip" data-kk="Чатботтар" data-ru="Чат-боты">Чатботтар</span>
+          <span class="chip" data-kk="Автоматизация" data-ru="Автоматизация">Автоматизация</span>
         </div>
       </div>
     </div>
@@ -435,14 +454,14 @@
   <div class="container">
     <div class="channel-box fade-up">
       <div class="channel-icon">📢</div>
-      <h3>Тегін Telegram арнасы</h3>
-      <p>AI дағдыларын тегін үйреніңіз</p>
+      <h3 data-kk="Тегін Telegram арнасы" data-ru="Бесплатный Telegram канал">Тегін Telegram арнасы</h3>
+      <p data-kk="AI дағдыларын тегін үйреніңіз" data-ru="Учитесь AI навыкам бесплатно">AI дағдыларын тегін үйреніңіз</p>
       <ul class="channel-perks">
-        <li>Тегін AI сабақтары</li>
-        <li>Видео жасау кеңестері</li>
-        <li>Жаңа қызметтер туралы хабарлама</li>
+        <li data-kk="Тегін AI сабақтары" data-ru="Бесплатные AI уроки">Тегін AI сабақтары</li>
+        <li data-kk="Видео жасау кеңестері" data-ru="Советы по созданию видео">Видео жасау кеңестері</li>
+        <li data-kk="Жаңа қызметтер туралы хабарлама" data-ru="Уведомления о новых услугах">Жаңа қызметтер туралы хабарлама</li>
       </ul>
-      <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary">Арнаға қосылу →</a>
+      <a href="https://t.me/+e9V00D-EATpkYjQy" class="btn-primary" data-kk="Арнаға қосылу →" data-ru="Подписаться →">Арнаға қосылу →</a>
     </div>
   </div>
 </section>
@@ -450,14 +469,13 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <h2 class="section-title fade-up">Хабарласыңыз</h2>
-    <p class="section-sub fade-up">Сұрақтарыңыз болса — жазыңыз!</p>
+    <h2 class="section-title fade-up" data-kk="Хабарласыңыз" data-ru="Свяжитесь со мной">Хабарласыңыз</h2>
+    <p class="section-sub fade-up" data-kk="Сұрақтарыңыз болса — жазыңыз!" data-ru="Есть вопросы — пишите!">Сұрақтарыңыз болса — жазыңыз!</p>
     <div class="contact-grid">
-
       <a href="https://t.me/+e9V00D-EATpkYjQy" class="contact-card">
         <span class="contact-icon">✈️</span>
         <span class="contact-label">Telegram</span>
-        <span class="contact-value">Жазу →</span>
+        <span class="contact-value" data-kk="Жазу →" data-ru="Написать →">Жазу →</span>
       </a>
       <a href="https://instagram.com/aisha_jividio" class="contact-card">
         <span class="contact-icon">📸</span>
@@ -470,26 +488,40 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2024 Aisha AI Studio. Барлық құқықтар сақталған.</p>
+  <p data-kk="© 2024 Aisha AI Studio. Барлық құқықтар сақталған." data-ru="© 2024 Aisha AI Studio. Все права защищены.">© 2024 Aisha AI Studio. Барлық құқықтар сақталған.</p>
   <p style="margin-top:8px">
-    <a href="https://t.me/+e9V00D-EATpkYjQy">Telegram-да жазу</a>
+    <a href="https://t.me/+e9V00D-EATpkYjQy" data-kk="Telegram-да жазу" data-ru="Написать в Telegram">Telegram-да жазу</a>
   </p>
 </footer>
 
 <script>
-  // Scroll animations
+  // ── LANGUAGE SWITCHER ──
+  function setLang(lang) {
+    document.querySelectorAll('[data-kk]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === (lang === 'kk' ? 'ҚАЗ' : 'РУС'));
+    });
+    localStorage.setItem('lang', lang);
+  }
+
+  // Apply saved language on load
+  const savedLang = localStorage.getItem('lang') || 'kk';
+  if (savedLang === 'ru') setLang('ru');
+
+  // ── SCROLL ANIMATIONS ──
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up, .service-card').forEach(el => observer.observe(el));
 
-  // Stagger service cards
   document.querySelectorAll('.service-card').forEach((card, i) => {
     card.style.transitionDelay = (i * 80) + 'ms';
   });
 
-  // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
