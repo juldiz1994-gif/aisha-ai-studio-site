@@ -141,6 +141,19 @@
     .bs-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; }
     .home-btns { display: flex; gap: 10px; }
     .home-btns .btn { padding: 18px; font-size: 17px; border-radius: 14px; }
+    .bots-section { margin-top: 26px; }
+    .bots-title { font-size: 16px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+    .bots-sub { font-size: 13px; color: var(--accent); text-align: center; margin-bottom: 14px; }
+    .bots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .bot-link {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 10px;
+      color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: border-color .15s;
+    }
+    .bot-link:active { border-color: var(--accent); }
+    .bot-link .bi { font-size: 20px; flex-shrink: 0; }
 
     /* ── SHOP ── */
     .pg-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; text-align: center; padding-top: 8px; }
@@ -155,7 +168,9 @@
     .svc-card:active { transform: scale(.97); }
     .svc-thumb { width: 100%; height: auto; display: block; border-radius: 12px; }
     .svc-icon { font-size: 28px; margin-bottom: 8px; }
-    .svc-name { font-size: 13px; font-weight: 600; line-height: 1.35; margin-bottom: 8px; }
+    .svc-name { font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 8px; text-align: center; padding: 7px 6px 4px; color: #fff; }
+    .svc-hint { font-size: 13px; color: var(--accent); background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.25); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px; text-align: center; }
+    .mod-hint { font-size: 13px; color: var(--accent); background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.25); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; }
     .svc-price { font-size: 14px; font-weight: 700; color: var(--accent); }
 
     /* ── DETAIL ── */
@@ -250,6 +265,8 @@
     }
     .ch-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .ch-sub { font-size: 13px; color: #ccc; line-height: 1.55; margin-bottom: 16px; }
+    .ch-insta { font-size: 13px; color: #fff; background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.25); border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; line-height: 1.55; }
+    .ch-insta a { color: var(--accent); text-decoration: underline; }
     .price-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
     .old-price { font-size: 17px; color: var(--muted); text-decoration: line-through; }
     .new-price { font-size: 28px; font-weight: 700; color: var(--accent); }
@@ -309,7 +326,8 @@
       border-radius: 8px;
       background: #000;
       display: block;
-      max-height: 200px;
+      max-height: 260px;
+      object-fit: contain;
     }
     .vid-cap {
       text-align: center;
@@ -403,6 +421,16 @@
     <button class="btn btn-green" onclick="showPage('shop')" data-i18n="shopBtn">🛒 Менің дүкенім</button>
     <button class="btn btn-outline" onclick="showPage('course')" data-i18n="courseBtn">📚 Курс</button>
   </div>
+  <div class="bots-section">
+    <div class="bots-title">Менің жасаған Telegram бот жұмыстарым</div>
+    <div class="bots-sub">Сенің де бизнесіңе арнап бот жасап беремін 🤖</div>
+    <div class="bots-grid">
+      <a class="bot-link" href="https://t.me/QazSatuBot" target="_blank"><span class="bi">✈️</span>QazSatuBot</a>
+      <a class="bot-link" href="https://t.me/DostJerebeBot" target="_blank"><span class="bi">✈️</span>DostJerebe Bot</a>
+      <a class="bot-link" href="https://t.me/studentgameBot" target="_blank"><span class="bi">✈️</span>StudentGame Bot</a>
+      <a class="bot-link" href="https://t.me/slotkz_bot" target="_blank"><span class="bi">✈️</span>SlotKZ Bot</a>
+    </div>
+  </div>
 </div>
 
 <!-- SHOP -->
@@ -434,6 +462,7 @@
       <span class="new-price">100 000 тг</span>
       <span class="sale-chip">-50%</span>
     </div>
+    <div class="ch-insta">📸 <a href="https://www.instagram.com/ai_aisha_kz?igsh=NHV4ZW85cGxtNHJr" target="_blank">Instagram каналға</a> тіркеліп, 10 досыңмен бөліссең → <b>35 000 тг</b></div>
     <button class="btn btn-green" onclick="enrollCourse()" data-i18n="enrollBtn">Курсқа тіркелу</button>
   </div>
   <div class="pg-sub" data-i18n="courseContent">Курс мазмұны — 7 модуль</div>
@@ -467,15 +496,18 @@ const SERVICES = [
   { id:1,  name:'Telegram бот', name_ru:'Telegram бот', price:35000, icon:'🤖', video:'1000183742.mp4',
     vcap:'Telegram бот осындай жұмыс істейді', vcap_ru:'Как работает Telegram бот',
     desc:'Telegram арқылы клиенттеріңізге автоматты жауап беретін бот. Тапсырыс қабылдау, ақпарат беру, хабарлама жіберу — бәрі автоматты. Бизнесіңіз 24/7 жұмыс істейді.',
-    desc_ru:'Бот для автоответов клиентам в Telegram. Приём заказов, информация, сообщения — всё автоматически. Бизнес работает 24/7.' },
+    desc_ru:'Бот для автоответов клиентам в Telegram. Приём заказов, информация, сообщения — всё автоматически. Бизнес работает 24/7.',
+    link:'https://t.me/aishabailanisbot', linkText:'🤖 Ботты тексеру', linkText_ru:'🤖 Тестировать бота' },
   { id:2,  name:'Instagram бот', name_ru:'Instagram бот', price:35000, icon:'📸', video:'1000183742.mp4',
     vcap:'Instagram бот осындай жұмыс істейді', vcap_ru:'Как работает Instagram бот',
     desc:'Instagram Direct арқылы автоматты жауап беру жүйесі. Клиенттердің сұрақтарына лезде жауап беріп, сатылымды арттырыңыз.',
-    desc_ru:'Автоответы через Instagram Direct. Мгновенно отвечайте клиентам и увеличивайте продажи.' },
+    desc_ru:'Автоответы через Instagram Direct. Мгновенно отвечайте клиентам и увеличивайте продажи.',
+    link:'https://www.instagram.com/ai_aisha_kz?igsh=NHV4ZW85cGxtNHJr', linkText:'📸 Instagram-ға өту', linkText_ru:'📸 Перейти в Instagram' },
   { id:3,  name:'WhatsApp бот', name_ru:'WhatsApp бот', price:50000, icon:'💬', video:'1000183742.mp4',
     vcap:'WhatsApp бот осындай жұмыс істейді', vcap_ru:'Как работает WhatsApp бот',
     desc:'WhatsApp Business арқылы клиенттеріңізбен автоматты байланыс. Тапсырыс растау, жеткізу ақпараты, FAQ жауаптары — бот бәрін орындайды.',
-    desc_ru:'Автосвязь с клиентами через WhatsApp Business. Подтверждение заказов, доставка, FAQ — бот делает всё.' },
+    desc_ru:'Автосвязь с клиентами через WhatsApp Business. Подтверждение заказов, доставка, FAQ — бот делает всё.',
+    link:'https://t.me/aishabailanisbot', linkText:'✈️ Telegram', linkText_ru:'✈️ Telegram' },
   { id:4,  name:'TikTok бот', name_ru:'TikTok бот', price:35000, icon:'🎵', video:'1000183742.mp4',
     vcap:'TikTok бот осындай жұмыс істейді', vcap_ru:'Как работает TikTok бот',
     desc:'TikTok пікірлері мен хабарламаларына автоматты жауап. Аудиторияңызбен байланысты сақтап, жаңа клиенттерді автоматты тартыңыз.',
@@ -483,7 +515,8 @@ const SERVICES = [
   { id:5,  name:'Курсқа арналған админ бот', name_ru:'Админ бот для курса', price:35000, icon:'🎓', video:'1000183742.mp4',
     vcap:'Курс админ боты осындай жұмыс істейді', vcap_ru:'Как работает админ бот',
     desc:'Онлайн курсыңызды басқаруға арналған арнайы Telegram бот. Студенттерді тіркеу, төлем растау, материалдар жіберу — бәрі автоматты.',
-    desc_ru:'Специальный Telegram бот для курса. Регистрация студентов, подтверждение оплаты, отправка материалов — всё автоматически.' },
+    desc_ru:'Специальный Telegram бот для курса. Регистрация студентов, подтверждение оплаты, отправка материалов — всё автоматически.',
+    link:'https://t.me/aishaadminbot', linkText:'🤖 Ботты тексеру', linkText_ru:'🤖 Тестировать бота' },
   { id:6,  name:'Автопостинг', name_ru:'Автопостинг', price:60000, icon:'📢', video:'автопостинг.mp4',
     vcap:'Автопостинг осындай жұмыс істейді', vcap_ru:'Как работает автопостинг',
     desc:'Постарыңызды алдын ала жоспарлап, автоматты жариялаңыз. Instagram, Telegram, Facebook — барлық платформаға бір мезгілде.',
@@ -511,11 +544,23 @@ const SERVICES = [
   { id:12, name:'Сайт жасау', name_ru:'Создание сайта', price:35000, icon:'🌐', video:'сайт.mp4',
     vcap:'ЖИ арқылы жасалған сайт осындай болады', vcap_ru:'Вот так выглядит сайт с ИИ',
     desc:'ЖИ арқылы кәсіби сайт жасаймыз. Жылдам, заманауи дизайн — бизнесіңізді онлайнға шығарыңыз.',
-    desc_ru:'Создаём профессиональный сайт с ИИ. Быстрый, современный дизайн — выведите бизнес в онлайн.' },
+    desc_ru:'Создаём профессиональный сайт с ИИ. Быстрый, современный дизайн — выведите бизнес в онлайн.',
+    link:'https://aisha-ai-studio.netlify.app', linkText:'🌐 Сынап көру', linkText_ru:'🌐 Попробовать' },
   { id:13, name:'Интернет дүкен жасау', name_ru:'Создание интернет-магазина', price:35000, icon:'🛍️', video:'интернет дукен.mp4',
     vcap:'Интернет дүкен осындай болады', vcap_ru:'Вот так выглядит интернет-магазин',
     desc:'Толыққанды интернет дүкен. Тауарлар каталогы, себет, тапсырыс қабылдау — бәрі автоматты. Онлайн сатылымды бастаңыз.',
-    desc_ru:'Полноценный интернет-магазин. Каталог, корзина, приём заказов — всё автоматически. Начните онлайн-продажи.' }
+    desc_ru:'Полноценный интернет-магазин. Каталог, корзина, приём заказов — всё автоматически. Начните онлайн-продажи.',
+    link:'https://aisha-ai-studio-kz.netlify.app', linkText:'🛍️ Сынап көру', linkText_ru:'🛍️ Попробовать' },
+  { id:14, name:'Куиз сайт', name_ru:'Квиз-сайт', price:35000, icon:'🎯', video:'автматандыру.mp4',
+    vcap:'Куиз сайт осындай болады', vcap_ru:'Вот так выглядит квиз-сайт',
+    desc:'Интерактивті тест және сауалнама сайты. Клиенттерді тарту, лид жинау, брендіңізді таныстыру — бәрі бір платформада.',
+    desc_ru:'Интерактивный тест и опросный сайт. Привлечение клиентов, сбор лидов, представление бренда — всё в одной платформе.',
+    link:'https://quiz-aisha.vercel.app', linkText:'🎯 Сынап көру', linkText_ru:'🎯 Попробовать' },
+  { id:15, name:'Жазылым бот', name_ru:'Бот подписки', price:35000, icon:'📅', video:'автматандыру.mp4',
+    vcap:'Жазылым бот осындай жұмыс істейді', vcap_ru:'Как работает бот подписки',
+    desc:'Автоматты жазылым жүйесі бар Telegram бот. Ақылы мазмұн, жазылым басқару, клиенттермен байланыс — бәрі автоматты.',
+    desc_ru:'Telegram бот с автоматической системой подписки. Платный контент, управление подписками — всё автоматически.',
+    link:'https://booking-demo-aisha.netlify.app', linkText:'🌐 Сынап көру', linkText_ru:'🌐 Попробовать' }
 ];
 
 const MODULES = [
@@ -525,25 +570,42 @@ const MODULES = [
   { num:2,  title:'Сайт жасау', title_ru:'Создание сайта',
     desc:'ЖИ арқылы кәсіби сайт жасаудың тиімді жолдары. Кодсыз немесе минималды кодпен — нақты нәтиже көрсетіледі.',
     desc_ru:'Эффективные способы создания сайта с ИИ. Без кода или с минимальным кодом — с реальным результатом.',
-    link:'https://aisha-ai-studio-production.up.railway.app/', linkText:'🌐 Сайтты ашып көру', linkText_ru:'🌐 Открыть сайт',
+    links:[
+      { href:'https://aisha-ai-studio.netlify.app', text:'🌐 Сынап көру', text_ru:'🌐 Попробовать' }
+    ],
     video:'сайт.mp4', vcap:'ЖИ арқылы жасалған сайт осындай болады', vcap_ru:'Вот так выглядит сайт с ИИ' },
   { num:3,  title:'Интернет дүкен жасау', title_ru:'Создание интернет-магазина',
     desc:'Онлайн дүкен жасаудың заманауи тәсілдері. ЖИ арқылы каталог, себет, тапсырыс жүйесін автоматтандырыңыз.',
     desc_ru:'Современные методы создания онлайн-магазина. Автоматизируйте каталог, корзину и систему заказов с ИИ.',
+    links:[
+      { href:'https://aisha-ai-studio-kz.netlify.app', text:'🛍️ Интернет дүкен', text_ru:'🛍️ Интернет-магазин' },
+      { href:'https://t.me/aishadukenbot', text:'📱 Телеграм дүкен', text_ru:'📱 Телеграм-магазин' }
+    ],
     video:'интернет дукен.mp4', vcap:'Интернет дүкен осындай болады', vcap_ru:'Вот так выглядит интернет-магазин' },
   { num:4,  title:'Бот жасау: WhatsApp, Telegram, Instagram және Админ бот', title_ru:'Создание ботов: WhatsApp, Telegram, Instagram и Админ-бот',
     desc:'WhatsApp, Telegram, Instagram — барлық платформаға бот жасауды үйренесіз. Курсқа арналған Админ бот қосымша бонус ретінде кіреді.',
     desc_ru:'WhatsApp, Telegram, Instagram — научитесь создавать ботов для всех платформ. Бонус: Админ-бот для курса.',
-    link:'https://t.me/AishaAqparatbot', linkText:'🤖 Ботты тексеру', linkText_ru:'🤖 Тестировать бота' },
+    links:[
+      { href:'https://www.instagram.com/ai_aisha_kz?igsh=NHV4ZW85cGxtNHJr', text:'📸 Instagram бот', text_ru:'📸 Instagram-бот' },
+      { href:'https://t.me/aishabailanisbot', text:'✈️ Telegram сілтеме', text_ru:'✈️ Telegram-бот' },
+      { href:'https://t.me/aishabailanisbot', text:'✈️ Telegram', text_ru:'✈️ Telegram' }
+    ] },
   { num:5,  title:'Админ бот', title_ru:'Админ-бот',
     desc:'Бизнесті басқаруға арналған Админ бот жасау. Тапсырыстарды, клиенттерді, статистиканы бір ботта қарау — толық практика.',
     desc_ru:'Создание Админ-бота для управления бизнесом. Заказы, клиенты, статистика в одном боте — полная практика.' },
   { num:6,  title:'Куиз сайт', title_ru:'Квиз-сайт',
     desc:'Тест және сауалнама сайтын жасауды үйренесіз. Лидтерді тартуға, тексеруге арналған интерактивті куиз платформасы.',
-    desc_ru:'Научитесь создавать тестовые и опросные сайты. Интерактивная квиз-платформа для привлечения лидов.' },
+    desc_ru:'Научитесь создавать тестовые и опросные сайты. Интерактивная квиз-платформа для привлечения лидов.',
+    links:[
+      { href:'https://quiz-aisha.vercel.app', text:'🎯 Сынап көру', text_ru:'🎯 Попробовать' }
+    ] },
   { num:7,  title:'Жазылым бот', title_ru:'Бот подписки',
-    desc:'Автоматты жазылым жүйесі бар бот жасаңыз. Ақылы және тегін мазмұнды басқару, жазылымды автоматтандыру.',
-    desc_ru:'Создайте бота с автоматической системой подписки. Управление платным и бесплатным контентом, автоматизация подписок.' },
+    desc:'Автоматты жазылым жүйесі бар бот жасаңыз. Ақылы және тегін мазмұнды басқару, жазылымды автоматтандыру. Бұл жерде сіздің Каспи жалғанады — автоматты толық ақша немесе жартылай ақша алынады.',
+    desc_ru:'Создайте бота с автоматической системой подписки. Управление платным и бесплатным контентом, автоматизация подписок. Здесь подключается ваш Kaspi — оплата списывается автоматически полностью или частично.',
+    links:[
+      { href:'https://booking-demo-aisha.netlify.app', text:'🌐 Сынап көру', text_ru:'🌐 Попробовать' },
+      { href:'https://t.me/aishaadminbot', text:'📱 Телеграм жазылым ботты сынап көру', text_ru:'📱 Попробовать Telegram бот подписки' }
+    ] },
   { num:8,  title:'ЖИ видео жасау', title_ru:'Создание ИИ-видео',
     desc:'Жасанды интеллект арқылы кәсіби контент видео жасайсыз. Брендіңізді таныстыруға, жарнамаға арналған видео — нақты практикалық сабақ.',
     desc_ru:'Создайте профессиональное контент-видео с ИИ. Для презентации бренда и рекламы — практический урок.',
@@ -571,8 +633,8 @@ const TRANS = {
     cartTitle:'🛒 Себет', cartEmpty:'Себет бос', cartEmptySub:'Дүкеннен қызмет таңдаңыз',
     cartEmptyBtn:'Дүкенге өту', cartTotal:'Жалпы сомасы:',
     waNoticeTitle:'📲 Тапсырыс жасау туралы',
-    waNoticeBody:'Қазір сіз WhatsApp-қа өтесіз. Барлық сұрақты сұраңыз — толық ақпарат береміз.',
-    waBtn:'📲 WhatsApp арқылы тапсырыс беру',
+    waNoticeBody:'Қазір сіз Telegram-ға өтесіз. Барлық сұрақты сұраңыз — толық ақпарат береміз.',
+    waBtn:'📲 Telegram арқылы тапсырыс беру',
     waGreeting:'Сәлем! Осы қызметтерді аламын:', waTotal:'Жалпы',
     testBot:'🤖 Ботты тексеру', addCart:'🛒 Себетке қосу', inCart:'✓ Себетте',
     alreadyCart:' себетте бар', addedCart:' себетке қосылды', goCart:'Себет →',
@@ -580,6 +642,8 @@ const TRANS = {
     courseSub:'Жасанды интеллект арқылы бизнесіңізді автоматтандырыңыз. 10 практикалық модуль.',
     enrollBtn:'Курсқа тіркелу', courseContent:'Курс мазмұны — 10 модуль',
     navHome:'Басты', navShop:'Дүкен', navCart:'Себет', navCourse:'Курс', backBtn:'← Артқа',
+    tryHint:'✅ Дайын нұсқасы бар — батырманы басып тексеріп алыңыз!',
+    videoHint:'▶ Видеоны ашып қараңыз — қысқаша түсінік аласыз',
   },
   ru: {
     studioTag:'Студия ИИ', homeName:'Привет! Я — Айша',
@@ -590,8 +654,8 @@ const TRANS = {
     cartTitle:'🛒 Корзина', cartEmpty:'Корзина пуста', cartEmptySub:'Выберите услугу в магазине',
     cartEmptyBtn:'В магазин', cartTotal:'Итого:',
     waNoticeTitle:'📲 О заказе',
-    waNoticeBody:'Сейчас вы перейдёте в WhatsApp. Задавайте вопросы — дадим полную информацию.',
-    waBtn:'📲 Заказать через WhatsApp',
+    waNoticeBody:'Сейчас вы перейдёте в Telegram. Задавайте вопросы — дадим полную информацию.',
+    waBtn:'📲 Заказать через Telegram',
     waGreeting:'Здравствуйте! Хочу приобрести:', waTotal:'Итого',
     testBot:'🤖 Тестировать бота', addCart:'🛒 Добавить в корзину', inCart:'✓ В корзине',
     alreadyCart:' уже в корзине', addedCart:' добавлено в корзину', goCart:'Корзина →',
@@ -599,6 +663,8 @@ const TRANS = {
     courseSub:'Автоматизируйте бизнес с помощью ИИ. 10 практических модулей.',
     enrollBtn:'Записаться на курс', courseContent:'Содержание курса — 10 модулей',
     navHome:'Главная', navShop:'Магазин', navCart:'Корзина', navCourse:'Курс', backBtn:'← Назад',
+    tryHint:'✅ Готовый вариант — нажмите кнопку и убедитесь!',
+    videoHint:'▶ Откройте видео — получите краткое объяснение',
   }
 };
 
@@ -662,6 +728,7 @@ function fmt(n) {
 let pageHistory = ['home'];
 
 function showPage(name, isBack) {
+  stopAllVideos();
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
@@ -692,6 +759,7 @@ function renderShop() {
   document.getElementById('servicesGrid').innerHTML = SERVICES.map(s => `
     <div class="svc-card" onclick="showDetail(${s.id})">
       <img class="svc-thumb" src="images/card_${s.id}.png" alt="${s.name}">
+      <div class="svc-name">${tn(s,'name')}</div>
     </div>
   `).join('');
 }
@@ -703,7 +771,8 @@ function showDetail(id) {
   const inCart = !!cart.find(x => x.id === id);
   const vSrc = 'videos/' + encodeURIComponent(s.video);
   document.getElementById('detailContent').innerHTML = `
-    <video class="svc-video" controls playsinline preload="metadata">
+    <div class="svc-hint">${s.link ? t('tryHint') : t('videoHint')}</div>
+    <video class="svc-video" controls playsinline preload="none">
       <source src="${vSrc}" type="video/mp4">
     </video>
     ${s.vcap ? `<div class="vid-cap">▶ ${tn(s,'vcap')}</div>` : ''}
@@ -711,7 +780,7 @@ function showDetail(id) {
     <div class="det-price">${fmt(s.price)}</div>
     <div class="det-desc">${tn(s,'desc')}</div>
     <div class="det-actions">
-      ${[1,2,3,4].includes(id) ? `<button class="btn btn-blue" onclick="window.open('https://t.me/AishaAqparatbot','_blank')">${t('testBot')}</button>` : ''}
+      ${s.link ? `<button class="btn btn-blue" onclick="stopAllVideos();window.open('${s.link}','_blank')">${LANG==='ru' && s.linkText_ru ? s.linkText_ru : (s.linkText || t('testBot'))}</button>` : ''}
       <button id="addCartBtn" class="btn ${inCart ? 'btn-added' : 'btn-green'}" onclick="addToCart(${id})">
         ${inCart ? t('inCart') : t('addCart')}
       </button>
@@ -758,7 +827,7 @@ function renderCart() {
       ${t('waNoticeBody')}
     </div>
     <div class="checkout-btns">
-      <button class="btn btn-tg" onclick="window.open('https://wa.me/87751768092?text=${waMsg}','_blank')">
+      <button class="btn btn-tg" onclick="window.open('https://t.me/aishabailanisbot','_blank')">
         ${t('waBtn')}
       </button>
     </div>`;
@@ -768,8 +837,12 @@ function renderCart() {
 function renderCourse() {
   document.getElementById('modulesList').innerHTML = MODULES.map(m => {
     let extra = '';
-    if (m.link) extra += `<a class="mod-link" href="${m.link}" target="_blank">${tn(m,'linkText')}</a><br>`;
-    if (m.video) extra += `<video class="mod-video" controls playsinline preload="metadata"><source src="videos/${encodeURIComponent(m.video)}" type="video/mp4"></video>${m.vcap ? `<div class="vid-cap">▶ ${tn(m,'vcap')}</div>` : ''}`;
+    if (m.links && m.links.length) {
+      extra += m.links.map(l => `<a class="mod-link" href="${l.href}" target="_blank" onclick="stopAllVideos()">${LANG==='ru' && l.text_ru ? l.text_ru : l.text}</a>`).join('') + '<br>';
+    } else if (m.link) {
+      extra += `<a class="mod-link" href="${m.link}" target="_blank" onclick="stopAllVideos()">${tn(m,'linkText')}</a><br>`;
+    }
+    if (m.video) extra += `<video class="mod-video" controls playsinline preload="none"><source src="videos/${encodeURIComponent(m.video)}" type="video/mp4"></video>${m.vcap ? `<div class="vid-cap">▶ ${tn(m,'vcap')}</div>` : ''}`;
     return `
       <div class="mod-item" id="mod-${m.num}">
         <div class="mod-head" onclick="toggleMod(${m.num})">
@@ -778,6 +851,7 @@ function renderCourse() {
           <div class="mod-arrow">›</div>
         </div>
         <div class="mod-body">
+          ${((m.links && m.links.length) || m.link) ? `<div class="mod-hint">${t('tryHint')}</div>` : m.video ? `<div class="mod-hint">${t('videoHint')}</div>` : ''}
           <div class="mod-desc">${tn(m,'desc')}</div>
           ${extra}
         </div>
@@ -785,12 +859,21 @@ function renderCourse() {
   }).join('');
 }
 
+function stopAllVideos() {
+  document.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
+}
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) stopAllVideos();
+});
+
 function toggleMod(num) {
-  document.getElementById('mod-' + num).classList.toggle('open');
+  stopAllVideos();
+  const el = document.getElementById('mod-' + num);
+  el.classList.toggle('open');
 }
 
 function enrollCourse() {
-  window.open('https://t.me/AishaAqparatbot', '_blank');
+  window.open('https://t.me/aishabailanisbot', '_blank');
 }
 
 // ── TOAST ─────────────────────────────────────────────────────

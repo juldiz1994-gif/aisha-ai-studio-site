@@ -1,4 +1,6 @@
-videos/
 .superpowers/
 photo_b64.txt
 index_deploy.html
+
+# Local Netlify folder
+.netlify
