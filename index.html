@@ -830,6 +830,7 @@ function renderCart() {
 
 function checkoutTelegram() {
   if (cart.length === 0) return;
+  window.open('https://t.me/aishabailanisbot', '_blank');
   const total = cart.reduce((s, x) => s + x.price, 0);
   const orderMsg = t('waGreeting') + '\n' +
     cart.map(x => `• ${x.name} — ${fmt(x.price)}`).join('\n') +
@@ -838,7 +839,6 @@ function checkoutTelegram() {
     navigator.clipboard.writeText(orderMsg).catch(() => {});
   }
   toast('📋', t('orderCopied'));
-  window.open('https://t.me/aishabailanisbot', '_blank');
 }
 
 // ── COURSE ────────────────────────────────────────────────────
