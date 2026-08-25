@@ -512,6 +512,10 @@ const SERVICES = [
     vcap:'TikTok бот осындай жұмыс істейді', vcap_ru:'Как работает TikTok бот',
     desc:'TikTok пікірлері мен хабарламаларына автоматты жауап. Аудиторияңызбен байланысты сақтап, жаңа клиенттерді автоматты тартыңыз.',
     desc_ru:'Автоответы на комментарии и сообщения в TikTok. Поддерживайте связь с аудиторией и привлекайте новых клиентов.' },
+  { id:5,  name:'Админ бот', name_ru:'Админ-бот', price:35000, icon:'🤖',
+    desc:'Бизнесті басқаруға арналған Telegram админ бот. Тапсырыстарды, клиенттерді, статистиканы бір ботта қарау.',
+    desc_ru:'Telegram админ-бот для управления бизнесом. Заказы, клиенты, статистика в одном боте.',
+    link:'https://iridescent-pavlova-50da47.netlify.app', linkText:'🤖 Сынап көру', linkText_ru:'🤖 Попробовать' },
   { id:6,  name:'Автопостинг', name_ru:'Автопостинг', price:60000, icon:'📢', video:'автопостинг.mp4',
     vcap:'Автопостинг осындай жұмыс істейді', vcap_ru:'Как работает автопостинг',
     desc:'Постарыңызды алдын ала жоспарлап, автоматты жариялаңыз. Instagram, Telegram, Facebook — барлық платформаға бір мезгілде.',
@@ -569,8 +573,7 @@ const MODULES = [
     desc:'Онлайн дүкен жасаудың заманауи тәсілдері. ЖИ арқылы каталог, себет, тапсырыс жүйесін автоматтандырыңыз.',
     desc_ru:'Современные методы создания онлайн-магазина. Автоматизируйте каталог, корзину и систему заказов с ИИ.',
     links:[
-      { href:'https://aisha-ai-studio-kz.netlify.app', text:'🛍️ Интернет дүкен', text_ru:'🛍️ Интернет-магазин' },
-      { href:'https://t.me/aishadukenbot', text:'📱 Телеграм дүкен', text_ru:'📱 Телеграм-магазин' }
+      { href:'https://aisha-ai-studio-kz.netlify.app', text:'🛍️ Интернет дүкен', text_ru:'🛍️ Интернет-магазин' }
     ],
     video:'интернет дукен.mp4', vcap:'Интернет дүкен осындай болады', vcap_ru:'Вот так выглядит интернет-магазин' },
   { num:4,  title:'Бот жасау: WhatsApp, Telegram, Instagram және Админ бот', title_ru:'Создание ботов: WhatsApp, Telegram, Instagram и Админ-бот',
@@ -583,7 +586,10 @@ const MODULES = [
     ] },
   { num:5,  title:'Админ бот', title_ru:'Админ-бот',
     desc:'Бизнесті басқаруға арналған Админ бот жасау. Тапсырыстарды, клиенттерді, статистиканы бір ботта қарау — толық практика.',
-    desc_ru:'Создание Админ-бота для управления бизнесом. Заказы, клиенты, статистика в одном боте — полная практика.' },
+    desc_ru:'Создание Админ-бота для управления бизнесом. Заказы, клиенты, статистика в одном боте — полная практика.',
+    links:[
+      { href:'https://iridescent-pavlova-50da47.netlify.app', text:'🤖 Сынап көру', text_ru:'🤖 Попробовать' }
+    ] },
   { num:6,  title:'Куиз сайт', title_ru:'Квиз-сайт',
     desc:'Тест және сауалнама сайтын жасауды үйренесіз. Лидтерді тартуға, тексеруге арналған интерактивті куиз платформасы.',
     desc_ru:'Научитесь создавать тестовые и опросные сайты. Интерактивная квиз-платформа для привлечения лидов.',
@@ -763,13 +769,14 @@ function showDetail(id) {
   const s = SERVICES.find(x => x.id === id);
   if (!s) return;
   const inCart = !!cart.find(x => x.id === id);
-  const vSrc = 'videos/' + encodeURIComponent(s.video);
+  const vSrc = s.video ? 'videos/' + encodeURIComponent(s.video) : '';
   document.getElementById('detailContent').innerHTML = `
     <div class="svc-hint">${s.link ? t('tryHint') : t('videoHint')}</div>
+    ${s.video ? `
     <video class="svc-video" controls playsinline preload="none">
       <source src="${vSrc}" type="video/mp4">
     </video>
-    ${s.vcap ? `<div class="vid-cap">▶ ${tn(s,'vcap')}</div>` : ''}
+    ${s.vcap ? `<div class="vid-cap">▶ ${tn(s,'vcap')}</div>` : ''}` : ''}
     <div class="det-title">${tn(s,'name')}</div>
     <div class="det-price">${fmt(s.price)}</div>
     <div class="det-desc">${tn(s,'desc')}</div>
