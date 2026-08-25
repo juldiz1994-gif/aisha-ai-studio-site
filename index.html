@@ -636,6 +636,7 @@ const TRANS = {
     waNoticeBody:'Қазір сіз Telegram-ға өтесіз. Барлық сұрақты сұраңыз — толық ақпарат береміз.',
     waBtn:'📲 Telegram арқылы тапсырыс беру',
     waGreeting:'Сәлем! Осы қызметтерді аламын:', waTotal:'Жалпы',
+    orderCopied:'Тапсырыс тізімі көшірілді — Telegram-да хабарлама өрісіне қойып (paste) жіберіңіз',
     testBot:'🤖 Ботты тексеру', addCart:'🛒 Себетке қосу', inCart:'✓ Себетте',
     alreadyCart:' себетте бар', addedCart:' себетке қосылды', goCart:'Себет →',
     courseTitle:'ЖИ Бизнес Автоматтандыру Курсы',
@@ -657,6 +658,7 @@ const TRANS = {
     waNoticeBody:'Сейчас вы перейдёте в Telegram. Задавайте вопросы — дадим полную информацию.',
     waBtn:'📲 Заказать через Telegram',
     waGreeting:'Здравствуйте! Хочу приобрести:', waTotal:'Итого',
+    orderCopied:'Список заказа скопирован — вставьте (paste) его в поле сообщения в Telegram',
     testBot:'🤖 Тестировать бота', addCart:'🛒 Добавить в корзину', inCart:'✓ В корзине',
     alreadyCart:' уже в корзине', addedCart:' добавлено в корзину', goCart:'Корзина →',
     courseTitle:'Курс по автоматизации бизнеса с ИИ',
@@ -804,11 +806,6 @@ function renderCart() {
     return;
   }
   const total = cart.reduce((s, x) => s + x.price, 0);
-  const waMsg = encodeURIComponent(
-    t('waGreeting') + '\n' +
-    cart.map(x => `• ${x.name} — ${fmt(x.price)}`).join('\n') +
-    `\n\n${t('waTotal')}: ${fmt(total)}`
-  );
   el.innerHTML = `
     ${cart.map(x => `
       <div class="cart-item">
@@ -828,10 +825,23 @@ function renderCart() {
       ${t('waNoticeBody')}
     </div>
     <div class="checkout-btns">
-      <button class="btn btn-tg" onclick="window.open('https://t.me/aishabailanisbot','_blank')">
+      <button class="btn btn-tg" onclick="checkoutTelegram()">
         ${t('waBtn')}
       </button>
     </div>`;
+}
+
+function checkoutTelegram() {
+  if (cart.length === 0) return;
+  const total = cart.reduce((s, x) => s + x.price, 0);
+  const orderMsg = t('waGreeting') + '\n' +
+    cart.map(x => `• ${x.name} — ${fmt(x.price)}`).join('\n') +
+    `\n\n${t('waTotal')}: ${fmt(total)}`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(orderMsg).catch(() => {});
+  }
+  toast('📋', t('orderCopied'));
+  window.open('https://t.me/aishabailanisbot', '_blank');
 }
 
 // ── COURSE ────────────────────────────────────────────────────
